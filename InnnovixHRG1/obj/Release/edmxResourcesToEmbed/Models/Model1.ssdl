@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Innovix12021Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CountryTBL">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MealPriceTBL">
+    <Key>
+      <PropertyRef Name="MealPriceID" />
+    </Key>
+    <Property Name="MealPriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MealPriceNum" Type="int" />
+    <Property Name="MealTypeIDD" Type="int" />
+    <Property Name="SeasonHolidayIDD" Type="int" />
+    <Property Name="IsStopped" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MealTypeTBL">
+    <Key>
+      <PropertyRef Name="MealTypeID" />
+    </Key>
+    <Property Name="MealTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MealTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsStopped" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoomPriceTBL">
+    <Key>
+      <PropertyRef Name="RoomPriceID" />
+    </Key>
+    <Property Name="RoomPriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomPriceNum" Type="int" />
+    <Property Name="RoomTypeIDD" Type="int" />
+    <Property Name="SeasonHolidayIDD" Type="int" />
+    <Property Name="IsStopped" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoomTypeTBL">
+    <Key>
+      <PropertyRef Name="RoomTypeID" />
+    </Key>
+    <Property Name="RoomTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsStopped" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SeasonPHolidayTBL">
+    <Key>
+      <PropertyRef Name="SeasonHolidayID" />
+    </Key>
+    <Property Name="SeasonHolidayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SeasonHolidayName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SeasonHolidayFrom" Type="date" />
+    <Property Name="SeasonHolidayTo" Type="date" />
+    <Property Name="IsStopped" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_MealPriceTBL_MealTypeTBL">
+    <End Role="MealTypeTBL" Type="Self.MealTypeTBL" Multiplicity="0..1" />
+    <End Role="MealPriceTBL" Type="Self.MealPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealTypeTBL">
+        <PropertyRef Name="MealTypeID" />
+      </Principal>
+      <Dependent Role="MealPriceTBL">
+        <PropertyRef Name="MealTypeIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealPriceTBL_SeasonPHolidayTBL">
+    <End Role="SeasonPHolidayTBL" Type="Self.SeasonPHolidayTBL" Multiplicity="0..1" />
+    <End Role="MealPriceTBL" Type="Self.MealPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeasonPHolidayTBL">
+        <PropertyRef Name="SeasonHolidayID" />
+      </Principal>
+      <Dependent Role="MealPriceTBL">
+        <PropertyRef Name="SeasonHolidayIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomPriceTBL_RoomTypeTBL">
+    <End Role="RoomTypeTBL" Type="Self.RoomTypeTBL" Multiplicity="0..1" />
+    <End Role="RoomPriceTBL" Type="Self.RoomPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomTypeTBL">
+        <PropertyRef Name="RoomTypeID" />
+      </Principal>
+      <Dependent Role="RoomPriceTBL">
+        <PropertyRef Name="RoomTypeIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomPriceTBL_SeasonPHolidayTBL">
+    <End Role="SeasonPHolidayTBL" Type="Self.SeasonPHolidayTBL" Multiplicity="0..1" />
+    <End Role="RoomPriceTBL" Type="Self.RoomPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeasonPHolidayTBL">
+        <PropertyRef Name="SeasonHolidayID" />
+      </Principal>
+      <Dependent Role="RoomPriceTBL">
+        <PropertyRef Name="SeasonHolidayIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Innovix12021ModelStoreContainer">
+    <EntitySet Name="CountryTBL" EntityType="Self.CountryTBL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MealPriceTBL" EntityType="Self.MealPriceTBL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MealTypeTBL" EntityType="Self.MealTypeTBL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoomPriceTBL" EntityType="Self.RoomPriceTBL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoomTypeTBL" EntityType="Self.RoomTypeTBL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SeasonPHolidayTBL" EntityType="Self.SeasonPHolidayTBL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_MealPriceTBL_MealTypeTBL" Association="Self.FK_MealPriceTBL_MealTypeTBL">
+      <End Role="MealTypeTBL" EntitySet="MealTypeTBL" />
+      <End Role="MealPriceTBL" EntitySet="MealPriceTBL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealPriceTBL_SeasonPHolidayTBL" Association="Self.FK_MealPriceTBL_SeasonPHolidayTBL">
+      <End Role="SeasonPHolidayTBL" EntitySet="SeasonPHolidayTBL" />
+      <End Role="MealPriceTBL" EntitySet="MealPriceTBL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomPriceTBL_RoomTypeTBL" Association="Self.FK_RoomPriceTBL_RoomTypeTBL">
+      <End Role="RoomTypeTBL" EntitySet="RoomTypeTBL" />
+      <End Role="RoomPriceTBL" EntitySet="RoomPriceTBL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomPriceTBL_SeasonPHolidayTBL" Association="Self.FK_RoomPriceTBL_SeasonPHolidayTBL">
+      <End Role="SeasonPHolidayTBL" EntitySet="SeasonPHolidayTBL" />
+      <End Role="RoomPriceTBL" EntitySet="RoomPriceTBL" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

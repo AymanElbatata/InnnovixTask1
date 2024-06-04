@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Innovix12021ModelStoreContainer" CdmEntityContainer="Innovix12021DataContext">
+    <EntitySetMapping Name="CountryTBL">
+      <EntityTypeMapping TypeName="Innovix12021Model.CountryTBL">
+        <MappingFragment StoreEntitySet="CountryTBL">
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MealPriceTBL">
+      <EntityTypeMapping TypeName="Innovix12021Model.MealPriceTBL">
+        <MappingFragment StoreEntitySet="MealPriceTBL">
+          <ScalarProperty Name="IsStopped" ColumnName="IsStopped" />
+          <ScalarProperty Name="SeasonHolidayIDD" ColumnName="SeasonHolidayIDD" />
+          <ScalarProperty Name="MealTypeIDD" ColumnName="MealTypeIDD" />
+          <ScalarProperty Name="MealPriceNum" ColumnName="MealPriceNum" />
+          <ScalarProperty Name="MealPriceID" ColumnName="MealPriceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MealTypeTBL">
+      <EntityTypeMapping TypeName="Innovix12021Model.MealTypeTBL">
+        <MappingFragment StoreEntitySet="MealTypeTBL">
+          <ScalarProperty Name="IsStopped" ColumnName="IsStopped" />
+          <ScalarProperty Name="MealTypeName" ColumnName="MealTypeName" />
+          <ScalarProperty Name="MealTypeID" ColumnName="MealTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomPriceTBL">
+      <EntityTypeMapping TypeName="Innovix12021Model.RoomPriceTBL">
+        <MappingFragment StoreEntitySet="RoomPriceTBL">
+          <ScalarProperty Name="IsStopped" ColumnName="IsStopped" />
+          <ScalarProperty Name="SeasonHolidayIDD" ColumnName="SeasonHolidayIDD" />
+          <ScalarProperty Name="RoomTypeIDD" ColumnName="RoomTypeIDD" />
+          <ScalarProperty Name="RoomPriceNum" ColumnName="RoomPriceNum" />
+          <ScalarProperty Name="RoomPriceID" ColumnName="RoomPriceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomTypeTBL">
+      <EntityTypeMapping TypeName="Innovix12021Model.RoomTypeTBL">
+        <MappingFragment StoreEntitySet="RoomTypeTBL">
+          <ScalarProperty Name="IsStopped" ColumnName="IsStopped" />
+          <ScalarProperty Name="RoomTypeName" ColumnName="RoomTypeName" />
+          <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeasonPHolidayTBL">
+      <EntityTypeMapping TypeName="Innovix12021Model.SeasonPHolidayTBL">
+        <MappingFragment StoreEntitySet="SeasonPHolidayTBL">
+          <ScalarProperty Name="IsStopped" ColumnName="IsStopped" />
+          <ScalarProperty Name="SeasonHolidayTo" ColumnName="SeasonHolidayTo" />
+          <ScalarProperty Name="SeasonHolidayFrom" ColumnName="SeasonHolidayFrom" />
+          <ScalarProperty Name="SeasonHolidayName" ColumnName="SeasonHolidayName" />
+          <ScalarProperty Name="SeasonHolidayID" ColumnName="SeasonHolidayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Innovix12021Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

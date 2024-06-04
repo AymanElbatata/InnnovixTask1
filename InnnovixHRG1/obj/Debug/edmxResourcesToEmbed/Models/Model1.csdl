@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Innovix12021Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Innovix12021DataContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CountryTBL" EntityType="Innovix12021Model.CountryTBL" />
+    <EntitySet Name="MealPriceTBL" EntityType="Innovix12021Model.MealPriceTBL" />
+    <EntitySet Name="MealTypeTBL" EntityType="Innovix12021Model.MealTypeTBL" />
+    <EntitySet Name="RoomPriceTBL" EntityType="Innovix12021Model.RoomPriceTBL" />
+    <EntitySet Name="RoomTypeTBL" EntityType="Innovix12021Model.RoomTypeTBL" />
+    <EntitySet Name="SeasonPHolidayTBL" EntityType="Innovix12021Model.SeasonPHolidayTBL" />
+    <EntitySet Name="sysdiagrams" EntityType="Innovix12021Model.sysdiagrams" />
+    <AssociationSet Name="FK_MealPriceTBL_MealTypeTBL" Association="Innovix12021Model.FK_MealPriceTBL_MealTypeTBL">
+      <End Role="MealTypeTBL" EntitySet="MealTypeTBL" />
+      <End Role="MealPriceTBL" EntitySet="MealPriceTBL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealPriceTBL_SeasonPHolidayTBL" Association="Innovix12021Model.FK_MealPriceTBL_SeasonPHolidayTBL">
+      <End Role="SeasonPHolidayTBL" EntitySet="SeasonPHolidayTBL" />
+      <End Role="MealPriceTBL" EntitySet="MealPriceTBL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomPriceTBL_RoomTypeTBL" Association="Innovix12021Model.FK_RoomPriceTBL_RoomTypeTBL">
+      <End Role="RoomTypeTBL" EntitySet="RoomTypeTBL" />
+      <End Role="RoomPriceTBL" EntitySet="RoomPriceTBL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomPriceTBL_SeasonPHolidayTBL" Association="Innovix12021Model.FK_RoomPriceTBL_SeasonPHolidayTBL">
+      <End Role="SeasonPHolidayTBL" EntitySet="SeasonPHolidayTBL" />
+      <End Role="RoomPriceTBL" EntitySet="RoomPriceTBL" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CountryTBL">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MealPriceTBL">
+    <Key>
+      <PropertyRef Name="MealPriceID" />
+    </Key>
+    <Property Name="MealPriceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MealPriceNum" Type="Int32" />
+    <Property Name="MealTypeIDD" Type="Int32" />
+    <Property Name="SeasonHolidayIDD" Type="Int32" />
+    <Property Name="IsStopped" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="MealTypeTBL" Relationship="Innovix12021Model.FK_MealPriceTBL_MealTypeTBL" FromRole="MealPriceTBL" ToRole="MealTypeTBL" />
+    <NavigationProperty Name="SeasonPHolidayTBL" Relationship="Innovix12021Model.FK_MealPriceTBL_SeasonPHolidayTBL" FromRole="MealPriceTBL" ToRole="SeasonPHolidayTBL" />
+  </EntityType>
+  <EntityType Name="MealTypeTBL">
+    <Key>
+      <PropertyRef Name="MealTypeID" />
+    </Key>
+    <Property Name="MealTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MealTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsStopped" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="MealPriceTBL" Relationship="Innovix12021Model.FK_MealPriceTBL_MealTypeTBL" FromRole="MealTypeTBL" ToRole="MealPriceTBL" />
+  </EntityType>
+  <EntityType Name="RoomPriceTBL">
+    <Key>
+      <PropertyRef Name="RoomPriceID" />
+    </Key>
+    <Property Name="RoomPriceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomPriceNum" Type="Int32" />
+    <Property Name="RoomTypeIDD" Type="Int32" />
+    <Property Name="SeasonHolidayIDD" Type="Int32" />
+    <Property Name="IsStopped" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RoomTypeTBL" Relationship="Innovix12021Model.FK_RoomPriceTBL_RoomTypeTBL" FromRole="RoomPriceTBL" ToRole="RoomTypeTBL" />
+    <NavigationProperty Name="SeasonPHolidayTBL" Relationship="Innovix12021Model.FK_RoomPriceTBL_SeasonPHolidayTBL" FromRole="RoomPriceTBL" ToRole="SeasonPHolidayTBL" />
+  </EntityType>
+  <EntityType Name="RoomTypeTBL">
+    <Key>
+      <PropertyRef Name="RoomTypeID" />
+    </Key>
+    <Property Name="RoomTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsStopped" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RoomPriceTBL" Relationship="Innovix12021Model.FK_RoomPriceTBL_RoomTypeTBL" FromRole="RoomTypeTBL" ToRole="RoomPriceTBL" />
+  </EntityType>
+  <EntityType Name="SeasonPHolidayTBL">
+    <Key>
+      <PropertyRef Name="SeasonHolidayID" />
+    </Key>
+    <Property Name="SeasonHolidayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SeasonHolidayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SeasonHolidayFrom" Type="DateTime" Precision="0" />
+    <Property Name="SeasonHolidayTo" Type="DateTime" Precision="0" />
+    <Property Name="IsStopped" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="MealPriceTBL" Relationship="Innovix12021Model.FK_MealPriceTBL_SeasonPHolidayTBL" FromRole="SeasonPHolidayTBL" ToRole="MealPriceTBL" />
+    <NavigationProperty Name="RoomPriceTBL" Relationship="Innovix12021Model.FK_RoomPriceTBL_SeasonPHolidayTBL" FromRole="SeasonPHolidayTBL" ToRole="RoomPriceTBL" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_MealPriceTBL_MealTypeTBL">
+    <End Type="Innovix12021Model.MealTypeTBL" Role="MealTypeTBL" Multiplicity="0..1" />
+    <End Type="Innovix12021Model.MealPriceTBL" Role="MealPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealTypeTBL">
+        <PropertyRef Name="MealTypeID" />
+      </Principal>
+      <Dependent Role="MealPriceTBL">
+        <PropertyRef Name="MealTypeIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealPriceTBL_SeasonPHolidayTBL">
+    <End Type="Innovix12021Model.SeasonPHolidayTBL" Role="SeasonPHolidayTBL" Multiplicity="0..1" />
+    <End Type="Innovix12021Model.MealPriceTBL" Role="MealPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeasonPHolidayTBL">
+        <PropertyRef Name="SeasonHolidayID" />
+      </Principal>
+      <Dependent Role="MealPriceTBL">
+        <PropertyRef Name="SeasonHolidayIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomPriceTBL_RoomTypeTBL">
+    <End Type="Innovix12021Model.RoomTypeTBL" Role="RoomTypeTBL" Multiplicity="0..1" />
+    <End Type="Innovix12021Model.RoomPriceTBL" Role="RoomPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomTypeTBL">
+        <PropertyRef Name="RoomTypeID" />
+      </Principal>
+      <Dependent Role="RoomPriceTBL">
+        <PropertyRef Name="RoomTypeIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomPriceTBL_SeasonPHolidayTBL">
+    <End Type="Innovix12021Model.SeasonPHolidayTBL" Role="SeasonPHolidayTBL" Multiplicity="0..1" />
+    <End Type="Innovix12021Model.RoomPriceTBL" Role="RoomPriceTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeasonPHolidayTBL">
+        <PropertyRef Name="SeasonHolidayID" />
+      </Principal>
+      <Dependent Role="RoomPriceTBL">
+        <PropertyRef Name="SeasonHolidayIDD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

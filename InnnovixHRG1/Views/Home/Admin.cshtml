@@ -1,0 +1,416 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+
+    <link href="~/Content/jtable/themes/metro/lightgray/jtable.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Jtable/OtherFiles/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+    @*<script src="~/Content/Jtable/OtherFiles/jquery-ui-1.12.1.min.js"></script>*@
+    <script src="~/Content/Jtable/jquery.jtable.min.js"></script>
+    <script type="text/javascript" src="~/Content/Jtable/OtherFiles/jquery.validationEngine.js"></script>
+    <script type="text/javascript" src="~/Content/Jtable/OtherFiles/jquery.validationEngine-en.js"></script>
+    <link href="~/Content/Jtable/themes/base/all.css" rel="stylesheet" />
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#SeasonPHoliday').jtable({
+            title: 'SeasonPHoliday',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            //defaultSorting: 'CourseName ASC',
+            columnResizable: true,
+            columnSelectable: true,
+            saveUserPreferences: true,
+            actions: {
+                listAction: '/SeasonPHoliday/listAll',
+                createAction: '/SeasonPHoliday/CreateOne',
+                updateAction: '/SeasonPHoliday/UpdateOne',
+                deleteAction: '/SeasonPHoliday/DeleteOne',
+            },
+            fields: {
+                SeasonHolidayID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                SeasonHolidayName: {
+                    title: 'SeasonHolidayName',
+                    inputClass: 'validate[required]'
+                },
+                SeasonHolidayFrom: {
+                    title: 'SeasonHolidayFrom',
+                    type: 'date',
+                    inputClass: 'validate[required]'
+                },
+                SeasonHolidayTo: {
+                    title: 'SeasonHolidayTo',
+                    type: 'date',
+                    inputClass: 'validate[required]'
+                },
+                IsStopped: {
+                    title: 'Stopped',
+                    type: 'checkbox',
+                    defaultValue: 'false',
+                    values: { 'false': 'No', 'true': 'Yes' },
+                },
+            },
+            formCreated: function (event, data) {
+                if (data.formType == "create") {
+                    $(".ui-dialog-title").text("Add New");
+                }
+                else {
+                    $(".ui-dialog-title").text("Modify");
+                }
+                $("#Edit-SeasonHolidayName").prop('maxlength', '50');
+
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+                $(".ui-dialog-title").text("Remove");
+            },
+
+        });
+        $('#SeasonPHoliday').jtable('load');
+
+    });
+</script>
+
+<div id="SeasonPHoliday" class="text-center"></div>
+
+<br />
+<br />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MealType').jtable({
+            title: 'MealType',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            //defaultSorting: 'CourseName ASC',
+            columnResizable: true,
+            columnSelectable: true,
+            saveUserPreferences: true,
+            actions: {
+                listAction: '/MealType/listAll',
+                createAction: '/MealType/CreateOne',
+                updateAction: '/MealType/UpdateOne',
+                deleteAction: '/MealType/DeleteOne',
+            },
+            fields: {
+                MealTypeID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                MealTypeName: {
+                    title: 'MealTypeName',
+                    inputClass: 'validate[required]'
+                },
+                IsStopped: {
+                    title: 'Stopped',
+                    type: 'checkbox',
+                    defaultValue: 'false',
+                    values: { 'false': 'No', 'true': 'Yes' },
+                },
+            },
+            formCreated: function (event, data) {
+                if (data.formType == "create") {
+                    $(".ui-dialog-title").text("Add New");
+                }
+                else {
+                    $(".ui-dialog-title").text("Modify");
+                }
+                $("#Edit-MealTypeName").prop('maxlength', '50');
+
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+                $(".ui-dialog-title").text("Remove");
+            },
+
+        });
+        $('#MealType').jtable('load');
+
+    });
+</script>
+
+<div id="MealType" class="text-center"></div>
+
+<br />
+<br />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MealPrice').jtable({
+            title: 'MealPrice',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            //defaultSorting: 'CourseName ASC',
+            columnResizable: true,
+            columnSelectable: true,
+            saveUserPreferences: true,
+            actions: {
+                listAction: '/MealPrice/listAll',
+                createAction: '/MealPrice/CreateOne',
+                updateAction: '/MealPrice/UpdateOne',
+                deleteAction: '/MealPrice/DeleteOne',
+            },
+            fields: {
+                MealPriceID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                MealPriceNum: {
+                    title: 'MealPriceAmount',
+                    inputClass: 'validate[required]'
+                },
+                MealTypeIDD: {
+                    title: 'MealTypeIDD',
+                    options: function (data) {
+                        if (data.source == 'list') {
+                            return '/MealType/Get_MealTypeIDD_List';
+                        }
+                        // ADD OR EDIT
+                        else {
+                            return '/MealType/Get_MealTypeIDD_ADDEDIT';
+                        }
+                    },
+                    inputClass: 'validate[required]',
+                },
+                SeasonHolidayIDD: {
+                    title: 'SeasonHolidayIDD',
+                    options: function (data) {
+                        if (data.source == 'list') {
+                            return '/SeasonPHoliday/Get_SeasonHolidayIDD_List';
+                        }
+                        // ADD OR EDIT
+                        else {
+                            return '/SeasonPHoliday/Get_SeasonHolidayIDD_ADDEDIT';
+                        }
+                    },
+                    inputClass: 'validate[required]',
+                },
+                IsStopped: {
+                    title: 'Stopped',
+                    type: 'checkbox',
+                    defaultValue: 'false',
+                    values: { 'false': 'No', 'true': 'Yes' },
+                },
+            },
+            formCreated: function (event, data) {
+                if (data.formType == "create") {
+                    $(".ui-dialog-title").text("Add New");
+                }
+                else {
+                    $(".ui-dialog-title").text("Modify");
+                }
+                $("#Edit-MealPriceNum").keydown(function (e) {
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        (e.keyCode >= 35 && e.keyCode <= 40)) {
+                        return;
+                    }
+                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                        e.preventDefault();
+                    }
+                });
+
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+                $(".ui-dialog-title").text("Remove");
+            },
+
+        });
+        $('#MealPrice').jtable('load');
+
+    });
+</script>
+
+<div id="MealPrice" class="text-center"></div>
+
+@*///*@
+
+<br />
+<br />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#RoomType').jtable({
+            title: 'RoomType',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            //defaultSorting: 'CourseName ASC',
+            columnResizable: true,
+            columnSelectable: true,
+            saveUserPreferences: true,
+            actions: {
+                listAction: '/RoomType/listAll',
+                createAction: '/RoomType/CreateOne',
+                updateAction: '/RoomType/UpdateOne',
+                deleteAction: '/RoomType/DeleteOne',
+            },
+            fields: {
+                RoomTypeID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                RoomTypeName: {
+                    title: 'RoomTypeName',
+                    inputClass: 'validate[required]'
+                },
+                IsStopped: {
+                    title: 'Stopped',
+                    type: 'checkbox',
+                    defaultValue: 'false',
+                    values: { 'false': 'No', 'true': 'Yes' },
+                },
+            },
+            formCreated: function (event, data) {
+                if (data.formType == "create") {
+                    $(".ui-dialog-title").text("Add New");
+                }
+                else {
+                    $(".ui-dialog-title").text("Modify");
+                }
+                $("#Edit-RoomTypeName").prop('maxlength', '50');
+
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+                $(".ui-dialog-title").text("Remove");
+            },
+
+        });
+        $('#RoomType').jtable('load');
+
+    });
+</script>
+
+<div id="RoomType" class="text-center"></div>
+
+<br />
+<br />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#RoomPrice').jtable({
+            title: 'RoomPrice',
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            //defaultSorting: 'CourseName ASC',
+            columnResizable: true,
+            columnSelectable: true,
+            saveUserPreferences: true,
+            actions: {
+                listAction: '/RoomPrice/listAll',
+                createAction: '/RoomPrice/CreateOne',
+                updateAction: '/RoomPrice/UpdateOne',
+                deleteAction: '/RoomPrice/DeleteOne',
+            },
+            fields: {
+                RoomPriceID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                RoomPriceNum: {
+                    title: 'RoomPriceAmount',
+                    inputClass: 'validate[required]'
+                },
+                RoomTypeIDD: {
+                    title: 'RoomTypeIDD',
+                    options: function (data) {
+                        if (data.source == 'list') {
+                            return '/RoomType/Get_RoomTypeIDD_List';
+                        }
+                        // ADD OR EDIT
+                        else {
+                            return '/RoomType/Get_RoomTypeIDD_ADDEDIT';
+                        }
+                    },
+                    inputClass: 'validate[required]',
+                },
+                SeasonHolidayIDD: {
+                    title: 'SeasonHolidayIDD',
+                    options: function (data) {
+                        if (data.source == 'list') {
+                            return '/SeasonPHoliday/Get_SeasonHolidayIDD_List';
+                        }
+                        // ADD OR EDIT
+                        else {
+                            return '/SeasonPHoliday/Get_SeasonHolidayIDD_ADDEDIT';
+                        }
+                    },
+                    inputClass: 'validate[required]',
+                },
+                IsStopped: {
+                    title: 'Stopped',
+                    type: 'checkbox',
+                    defaultValue: 'false',
+                    values: { 'false': 'No', 'true': 'Yes' },
+                },
+            },
+            formCreated: function (event, data) {
+                if (data.formType == "create") {
+                    $(".ui-dialog-title").text("Add New");
+                }
+                else {
+                    $(".ui-dialog-title").text("Modify");
+                }
+                $("#Edit-RoomPriceNum").keydown(function (e) {
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        (e.keyCode >= 35 && e.keyCode <= 40)) {
+                        return;
+                    }
+                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                        e.preventDefault();
+                    }
+                });
+
+            },
+            formSubmitting: function (event, data) {
+                return data.form.validationEngine('validate');
+            },
+            formClosed: function (event, data) {
+                data.form.validationEngine('hide');
+                data.form.validationEngine('detach');
+                $(".ui-dialog-title").text("Remove");
+            },
+
+        });
+        $('#RoomPrice').jtable('load');
+
+    });
+</script>
+
+<div id="RoomPrice" class="text-center"></div>
